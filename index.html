@@ -26,11 +26,11 @@
           background: linear-gradient(to bottom, rgba(254,255,255,1) 0%,rgba(210,235,249,1) 100%); /* W3C */
           filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#feffff', endColorstr='#d2ebf9',GradientType=0 ); /* IE6-9 */
           
-          overflow: hidden;
+          overflow-x:scroll;
 
     }
     .panel-body{
-      height: 600px;
+      height: 400px;
     }
     .posts{
       overflow-y:scroll;
@@ -70,7 +70,7 @@
         <div class="panel-body">
           <ol class="list-group">
             <p ng-show="showLoading">Please wait..</p>
-            <li  class="list-group-item " ng-repeat="person in postCountArr  | orderBy:'count':true"><span class="badge">{{person.count}}</span>{{person.name}}</li>
+            <li  class="list-group-item " ng-repeat="person in postCountArr  | orderBy:'count':true | limitTo:9" ><span class="badge">{{person.count}}</span>{{person.name}}</li>
           </ol>
         </div>
       </div>
