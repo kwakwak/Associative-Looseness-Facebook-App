@@ -54,9 +54,9 @@ app.controller('authenticationCtrl', ['$scope', 'Facebook', function($scope, Fac
       Facebook.api('/231120563712448/feed?limit=500', function(response) {
           $scope.groupFeed=response;
           $scope.showLoading =false;
-          var exist = null;
+          console.dir ($scope.groupFeed);
+ 
           var postCount = {};
-
           response.data.forEach(function(entryFB) {
               var name=entryFB.from.name;
               postCount.hasOwnProperty(name)?
@@ -70,7 +70,6 @@ app.controller('authenticationCtrl', ['$scope', 'Facebook', function($scope, Fac
           }, postCountArr);
           $scope.postCountArr =postCountArr;
 
-          console.dir ($scope.postCountArr);
 
       });
   
