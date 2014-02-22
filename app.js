@@ -45,6 +45,7 @@ app.controller('authenticationCtrl', ['$scope', 'Facebook', function($scope, Fac
   };
 
   $scope.getFeed = function() {
+     Facebook.login(function(){}, {scope: 'email'});
   $scope.showLoading =true;
    Facebook.login(function(){
       Facebook.api('/me', function(response) {
@@ -53,7 +54,26 @@ app.controller('authenticationCtrl', ['$scope', 'Facebook', function($scope, Fac
       Facebook.api('/231120563712448/feed?limit=500', function(response) {
           $scope.groupFeed=response;
           $scope.showLoading =false;
+          var exist = null;
+          var postCount = {};
+
+          response.data.forEach(function(entryFB) {
+              var name=entryFB.from.name;
+              postCount.hasOwnProperty(name)?
+              postCount[name].count++:
+              postCount[name] = {name:name,count:1};
+          }); 
+
+          var postCountArr = [];
+          angular.forEach(postCount, function(value, key){
+            this.push({'count':value.count,'name':key});
+          }, postCountArr);
+          $scope.postCountArr =postCountArr;
+
+          console.dir ($scope.postCountArr);
+
       });
+  
     }, {scope: 'email'});
   };
 

@@ -11,14 +11,70 @@
   <script src="http://code.angularjs.org/1.2.10/angular.js"></script>
   <script src="angular-facebook.js"></script>
   <script src="app.js"></script>
+
+  <style>
+    body,html{
+      height: 100%;
+    }
+    body{
+          background: rgb(254,255,255); /* Old browsers */
+          background: -moz-linear-gradient(top, rgba(254,255,255,1) 0%, rgba(210,235,249,1) 100%); /* FF3.6+ */
+          background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(254,255,255,1)), color-stop(100%,rgba(210,235,249,1))); /* Chrome,Safari4+ */
+          background: -webkit-linear-gradient(top, rgba(254,255,255,1) 0%,rgba(210,235,249,1) 100%); /* Chrome10+,Safari5.1+ */
+          background: -o-linear-gradient(top, rgba(254,255,255,1) 0%,rgba(210,235,249,1) 100%); /* Opera 11.10+ */
+          background: -ms-linear-gradient(top, rgba(254,255,255,1) 0%,rgba(210,235,249,1) 100%); /* IE10+ */
+          background: linear-gradient(to bottom, rgba(254,255,255,1) 0%,rgba(210,235,249,1) 100%); /* W3C */
+          filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#feffff', endColorstr='#d2ebf9',GradientType=0 ); /* IE6-9 */
+          
+          overflow: hidden;
+
+    }
+    .panel-body{
+      height: 600px;
+    }
+    .posts{
+      overflow-y:scroll;
+    }
+    .container{
+      padding : 10px;
+    }
+
+  </style>
 </head>
-<body ng-controller="authenticationCtrl" style="margin:10px;">
-  <h4>Hey {{user.name}}!</h4>
-  <p ng-show="showLoading">Please wait..</p>
+<body ng-controller="authenticationCtrl" >
+<div class="container">
 
-  <ul>
-    <li ng-repeat="item in groupFeed.data">{{item.from.name}} - <a target="_blank" href="{{item.link}}">{{item.name}}</a></li>
-  </ul>
+  <h3>Associative-Looseness-Facebook-App</h3>
+  <hr/>
 
+  <div class="row">
+    <div class="col-xs-6">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <h3 class="panel-title">Posts List</h3>
+        </div>
+        <div class="panel-body posts">
+          <p ng-show="showLoading">Please wait..</p>
+          <ol>
+            <li ng-repeat="item in groupFeed.data">{{item.from.name}} - <a target="_blank" href="{{item.link}}">{{item.name}}</a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xs-6">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <h3 class="panel-title">Leaderboard</h3>
+        </div>
+        <div class="panel-body">
+          <ol class="list-group">
+            <p ng-show="showLoading">Please wait..</p>
+            <li  class="list-group-item " ng-repeat="person in postCountArr  | orderBy:'count':true"><span class="badge">{{person.count}}</span>{{person.name}}</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+</div>
 </body>
 </html>
