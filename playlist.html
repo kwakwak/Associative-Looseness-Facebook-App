@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+  <meta charset="utf-8" />
+  <title>Associative Looseness Facebook App</title>
+  <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" />
+  <script>
+  document.write('<base href="' + document.location + '" />');
+  </script>
+
+  <script src="http://code.angularjs.org/1.2.10/angular.js"></script>
+  <script src="angular-facebook.js"></script>
+  <script src="app.js"></script>
+
+</head>
+<body ng-controller="authenticationCtrl" >
+
+<p ng-repeat="item in groupFeed.data">{{item.link}}</p>
+         
+</body>
+</html>
+
+
